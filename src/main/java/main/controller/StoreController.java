@@ -1,5 +1,6 @@
 package main.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class StoreController {
 
   private final ProductService productService;
 
+  @Operation(summary = "Добавление товара")
   @PostMapping("")
   public ResponseEntity<Long> addProduct(@RequestBody RqProductDto product,
       @RequestParam(name = "volume", required = false) Integer volume,
@@ -38,6 +40,7 @@ public class StoreController {
     }
   }
 
+  @Operation(summary = "Редактирование товара")
   @PutMapping("/{id}")
   public ResponseEntity<Long> updateProduct(@PathVariable Long id, @RequestBody RqProductDto product,
       @RequestParam(name = "volume", required = false) Integer volume,
@@ -52,6 +55,7 @@ public class StoreController {
     }
   }
 
+  @Operation(summary = "Получение товаров по типу")
   @GetMapping("")
   public ResponseEntity<List<RsProductDto>> findAllByType(@RequestParam(name = "type") String type) {
     try {
@@ -62,6 +66,7 @@ public class StoreController {
     }
   }
 
+  @Operation(summary = "Получение продукта по id")
   @GetMapping("/{id}")
   public ResponseEntity<RsProductDto> findProductById(@PathVariable Long id) {
     try {
